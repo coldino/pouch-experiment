@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<head>
+    <script src="//cdn.jsdelivr.net/npm/pouchdb@7.0.0/dist/pouchdb.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/pouchdb@7.0.0/dist/pouchdb.find.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <div v-if="syncactive" class="loading active">...loading...</div>
+            <div v-else class="loading">Network idle.</div>
+            <div class="syncstate">
+                <span>Pull: <span :class="{active:sync.pull.state!='pending'}">{{ sync.pull.state }}</span></span>
+                <span>Push: <span :class="{active:sync.push.state!='pending'}">{{ sync.push.state }}</span></span>
+            </div>
+        </header>
+
+        <main>
+            <table class="zui-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Species</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="creature in creatures">
+                        <td><a @click="removeCreature(creature)">&#x1f5d1;</a></td>
+                        <td>{{creature.name}}</td>
+                        <td>{{creature.species}}</td>
+                    </tr>
+                    <tr v-if="creatures == []">
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>{{ nEntries }} entries found</div>
+        </main>
+
+        <nav>
+            <ul>
+                <li v-for="entry in logs">
+                    {{entry[0]}} - {{entry[1]}}
+                </li>
+            </ul>
+        </nav>
+
+        <footer>
+            <input type="text" placeholder="name" name="name" v-model="inpName">
+            <input type="text" placeholder="species" name="species" v-model="inpSpecies">
+            <button @click="addCreature">Add</button>
+        </footer>
+    </div>
+</body>
+
+<script src="ui.js"></script>
+<script src="app.js"></script>

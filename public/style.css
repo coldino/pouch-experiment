@@ -1,0 +1,76 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font: normal 13px Arial, sans-serif;
+}
+nav, main {
+    overflow-x: auto;
+    overflow-y: scroll;
+}
+nav, main, footer, header {
+    padding: 1rem;
+}
+* {
+    box-sizing: border-box;
+}
+header, footer {
+    background: lightgray;
+}
+nav {
+    border-left: 1px solid lightgray;
+}
+nav ul {
+    padding-inline-start: 0;
+}
+nav li {
+    list-style-type: none;
+}
+div#app {
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 3fr 5fr;
+    grid-template-areas: "header   header"
+                         "content  nav"
+                         "footer   footer";
+}
+div#app > header {
+    grid-area: header;
+}
+div#app > nav {
+    grid-area: nav;
+}
+div#app > footer {
+    grid-area: footer;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+header .active {
+    background-color:yellow;
+}
+
+.zui-table {
+        border: solid 1px #DDEEEE;
+        border-collapse: collapse;
+        border-spacing: 0;
+        margin-bottom: 1em;
+}
+.zui-table thead th {
+        background-color: #DDEFEF;
+        border: solid 1px #DDEEEE;
+        color: #336B6B;
+        padding: 0.3rem 0.8rem 0.2rem 0.8rem;
+        text-align: left;
+        text-shadow: 1px 1px 1px #fff;
+}
+.zui-table tbody td {
+        border: solid 1px #DDEEEE;
+        color: #333;
+        padding: 0.3rem 0.8rem 0.2rem 0.8rem;
+        text-shadow: 1px 1px 1px #fff;
+}

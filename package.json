@@ -1,0 +1,12 @@
+{
+  "main": "src/index.js",
+  "dependencies": {
+    "corser": "2.x",
+    "express": "4.x",
+    "express-pouchdb": "4.1.x",
+    "pouchdb-node": "7.x"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  }
+}
