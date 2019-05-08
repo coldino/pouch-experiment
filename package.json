@@ -7,6 +7,7 @@
     "pouchdb-node": "7.x"
   },
   "scripts": {
+    "gencert": "bash scripts/generate-ssl.sh",
     "start": "node src/index.js"
   }
 }

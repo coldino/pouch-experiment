@@ -1,0 +1,6 @@
+{
+    "files.exclude": {
+        ".user-certs/": true,
+        "db/": true
+    }
+}
