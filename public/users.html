@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<head>
+    <script src="//cdn.jsdelivr.net/npm/pouchdb@7.0.0/dist/pouchdb.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/pouchdb@7.0.0/dist/pouchdb.find.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/pouchdb-authentication@1.1.3/dist/pouchdb.authentication.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <div></div>
+            <div class="syncstate">
+                <span>{{ changesState }}</span>
+            </div>
+        </header>
+
+        <main class="gridded" style="grid-template-rows: auto 1fr">
+            <section style="grid-row: 1">
+                <p>
+                    Current user:
+                    <span v-if="userCtx">{{ userCtx.name}} [{{ userCtx.roles.join(', ') }}]</span>
+                    <button style="float: right" @click="refreshSession">Refresh</button>
+                </p>
+                <div>
+                    Login:
+                    <input type="text" placeholder="user" v-model="inpLoginUser">
+                    <input type="password" placeholder="password" v-model="inpLoginPwd">
+                    <button @click="performLogin">Login</button>
+                </div>
+            </section>
+            <section style="grid-row: 2">
+                <table class="zui-table">
+                    <thead>
+                        <tr>
+                            <th>User Name</th>
+                            <th>Roles</th>
+                            <!-- <th>Data</th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="user in entries">
+                            <td>{{user.name}}</td>
+                            <td><div v-for="role in user.roles">{{role}}</div></td>
+                            <!-- <td>{{user.roles.join(', ')}}</td> -->
+                            <!-- <td>{{user}}</td> -->
+                        </tr>
+                        <tr v-if="entries == []">
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>{{ nEntries }} entries found</div>
+            </section>
+        </main>
+
+        <nav>
+            <ul>
+                <li v-for="[time,msg],i in logs">
+                    {{time}} - {{msg}}
+                </li>
+            </ul>
+        </nav>
+
+        <footer>
+            <input type="text" placeholder="name" name="name" v-model="inpName">
+            <input type="text" placeholder="password" name="pwd" v-model="inpPwd">
+            <button @click="addEntry">Add</button>
+        </footer>
+    </div>
+</body>
+
+<script src="common.js"></script>
+<script src="users.js"></script>
